@@ -1,20 +1,16 @@
 create database learnbay;
  select * from Crop_prod_study; 
 
- ---Calculate Crop Yield
-
+ ---1.Calculate Crop Yield
  SELECT 
-    Crop,
     State_Name,
-    Crop_Year,
+    Crop,
     SUM(Production) / NULLIF(SUM(Area), 0) AS Crop_Yield
 FROM Crop_prod_study
-GROUP BY Crop, State_Name, Crop_Year
+GROUP BY State_Name, Crop
 ORDER BY Crop_Yield DESC;
-
- ---Year-over-Year Percentage Growth in Crop Production
-
- SELECT 
+---2.Year-over-Year Percentage Growth in Crop Production:
+===SELECT 
     State_Name,
     Crop,
     crop_Year,
@@ -27,13 +23,7 @@ ORDER BY State_Name, Crop, crop_Year;
 
 ---3. Average Yield by State and Top N States with Highest Average Yield--
 
-SELECT 
-    State_name,
-    AVG(Production / NULLIF(Area, 0)) AS Average_Yield
-FROM Crop_prod_study
-GROUP BY State_name
-ORDER BY Average_Yield DESC
-top 10;
+
 
 SELECT TOP 10
     State_Name,
